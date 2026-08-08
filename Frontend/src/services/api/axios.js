@@ -49,7 +49,7 @@ function getRefreshToken(module) {
 function clearStoredModuleAuth(module) {
   try {
     clearModuleAuth(module);
-  } catch (_) {}
+  } catch (_) { }
 }
 
 /**
@@ -137,7 +137,7 @@ function createModuleClient(moduleName) {
   client.interceptors.request.use(
     (config) => {
       config.contextModule = moduleName;
-      
+
       // FormData handling
       if (config.data instanceof FormData) {
         if (config.headers && config.headers["Content-Type"]) {
@@ -174,9 +174,9 @@ function createModuleClient(moduleName) {
     (response) => response,
     async (err) => {
       const original = err?.config;
-      
+
       if (err?.response?.status === 429) return Promise.reject(err);
-      
+
       // 403 handling (Forbidden vs Unauthorized)
       if (err?.response?.status === 403) {
         // Token is valid but wrong role. Don't logout, just deny access.
@@ -220,8 +220,8 @@ function createModuleClient(moduleName) {
 
         if (newAccessToken) {
           setModuleAccessToken(moduleName, newAccessToken);
-          window.dispatchEvent(new CustomEvent("authRefreshed", { 
-            detail: { module: moduleName, token: newAccessToken } 
+          window.dispatchEvent(new CustomEvent("authRefreshed", {
+            detail: { module: moduleName, token: newAccessToken }
           }));
           onRefreshed(newAccessToken);
           original.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -288,8 +288,8 @@ apiClient.interceptors.request.use(
     // Automatically inject Zone ID and Coordinates for user/public endpoints
     if (module === "user" || module === "public" || module === "delivery") {
       const { zoneId, latitude, longitude } = readStoredZoneContext();
-        const lat = latitude != null ? String(latitude) : null;
-        const lng = longitude != null ? String(longitude) : null;
+      const lat = latitude != null ? String(latitude) : null;
+      const lng = longitude != null ? String(longitude) : null;
       if (zoneId) {
         config.headers["X-Zone-Id"] = zoneId;
       }
