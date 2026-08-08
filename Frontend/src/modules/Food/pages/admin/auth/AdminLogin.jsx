@@ -6,10 +6,12 @@ import { setAuthData } from "@food/utils/auth"
 import { ShieldCheck, UserCog, Star, Heart, ArrowRight, Loader2, Mail, Lock, Eye, EyeOff, ShieldQuestion } from "lucide-react"
 import { Button } from "@food/components/ui/button"
 import logoNew from "@/assets/logo.png"
+import { useAppLogo } from "@food/hooks/useAppLogo"
 import { toast } from "sonner"
 
 export default function AdminLogin() {
   const navigate = useNavigate()
+  const appLogo = useAppLogo("admin_app")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
@@ -84,8 +86,8 @@ export default function AdminLogin() {
               style={{ borderRadius: '50%', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
             >
               <img
-                src={logoNew}
-                alt="Tuggo Food Delivery Logo"
+                src={appLogo || logoNew}
+                alt="MAAVA Food Delivery Logo"
                 className="w-full h-full object-cover scale-[1.15]"
                 style={{ borderRadius: '50%' }}
               />

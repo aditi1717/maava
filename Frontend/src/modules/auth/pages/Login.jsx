@@ -6,6 +6,7 @@ import { toast } from "sonner"
 import { authAPI, userAPI } from "@food/api"
 import { setAuthData } from "@food/utils/auth"
 import logoNew from "@/assets/logo.png"
+import { useAppLogo } from "@food/hooks/useAppLogo"
 import {
   Dialog,
   DialogContent,
@@ -17,6 +18,7 @@ import { Input } from "@food/components/ui/input"
 import { Label } from "@food/components/ui/label"
 
 export default function UnifiedOTPFastLogin() {
+  const appLogo = useAppLogo("user_app")
   const RESEND_COOLDOWN_SECONDS = 60
   const [phoneNumber, setPhoneNumber] = useState(() => sessionStorage.getItem("draft_phone_login") || "")
   const [otp, setOtp] = useState("")
@@ -326,8 +328,8 @@ export default function UnifiedOTPFastLogin() {
             className="w-28 h-28 md:w-32 md:h-32 rounded-full shadow-[0_8px_30px_rgba(247,98,8,0.2)] border-4 border-white dark:border-[#141414] mb-8 overflow-hidden bg-white"
           >
             <img
-              src={logoNew}
-              alt="Tuggo Food Tuggo Logo"
+              src={appLogo || logoNew}
+              alt="MAAVA Food Logo"
               className="w-full h-full object-cover"
               onError={(e) => {
                 e.target.onerror = null;

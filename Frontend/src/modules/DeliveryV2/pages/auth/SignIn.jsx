@@ -7,11 +7,13 @@ import { toast } from "sonner"
 import { deliveryAPI } from "@food/api"
 import { clearModuleAuth } from "@food/utils/auth"
 import logoNew from "@/assets/logo.png"
+import { useAppLogo } from "@food/hooks/useAppLogo"
 
 const DEFAULT_COUNTRY_CODE = "+91"
 
 export default function DeliverySignIn() {
   const navigate = useNavigate()
+  const appLogo = useAppLogo("delivery_app")
   const [phone, setPhone] = useState(() => {
     const draft = localStorage.getItem("delivery_draft_phone")
     if (draft) return draft;
@@ -136,7 +138,7 @@ export default function DeliverySignIn() {
               style={{ borderRadius: '50%', WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
             >
               <img 
-                src={logoNew} 
+                src={appLogo || logoNew} 
                 alt="Delivery Logo" 
                 className="w-full h-full object-cover scale-[1.05]"
                 style={{ borderRadius: '50%' }}
