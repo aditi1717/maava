@@ -8,11 +8,23 @@ import axios from "axios";
 import { readStoredZoneContext } from "@food/utils/locationPersistence";
 import { clearModuleAuth, getModuleRefreshToken, getModuleToken, setModuleAccessToken } from "@food/utils/auth";
 
-// Prefer explicit env. If not set, default to /api/v1 so the Vite proxy can forward to backend.
-const baseURL =
+let rawBaseURL =
   typeof import.meta !== "undefined" && import.meta.env?.VITE_API_BASE_URL
     ? String(import.meta.env.VITE_API_BASE_URL).replace(/\/$/, "")
     : "/api/v1";
+
+// Production Safety: On production domains (non-localhost), force /api/v1 if pointing to localhost or relative
+if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+  if (!rawBaseURL || rawBaseURL.includes("localhost") || rawBaseURL.includes("127.0.0.1")) {
+    rawBaseURL = "/api/v1";
+  }
+}
+
+if (rawBaseURL && !rawBaseURL.startsWith("http://") && !rawBaseURL.startsWith("https://") && !rawBaseURL.startsWith("/")) {
+  rawBaseURL = "/" + rawBaseURL;
+}
+
+const baseURL = rawBaseURL;
 
 /** 
  * Common Helpers 
