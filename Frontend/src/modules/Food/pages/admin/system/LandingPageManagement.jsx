@@ -87,7 +87,7 @@ export default function LandingPageManagement() {
         { label: 'Sitemap', url: '#' }
       ]
     },
-    copyrightText: '© 2026 Tuggo Food Delivery™ Ltd. All rights reserved.',
+    copyrightText: '© 2026 MAAVA Ltd. All rights reserved.',
     heroSlides: []
   })
   const [settingsLoading, setSettingsLoading] = useState(true)

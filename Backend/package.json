@@ -5,8 +5,8 @@
   "description": "Tuggo Master Product Backend",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node scripts/dev-watch.js server.js",
+    "start": "node api.js && node server.js",
+    "dev": "node api.js && node scripts/dev-watch.js server.js",
     "dev:socket": "node scripts/dev-watch.js socket-server.js",
     "worker:otp": "node src/queues/workers/otp.worker.js",
     "worker:notification": "node src/queues/workers/notification.worker.js",
